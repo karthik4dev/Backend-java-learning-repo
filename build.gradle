@@ -1,6 +1,7 @@
 plugins {
     id 'java'
 }
+/*Used to install dependencies manually */
 
 group 'com.karthikprojects'
 version '1.0-SNAPSHOT'
@@ -10,10 +11,36 @@ repositories {
 }
 
 dependencies {
+    /*Using retrofit in order to change HTTP API to java interface*/
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
+    /*Using GSON converter in order to Serialize/Deserialize the Java Objects to JSON. Please look the code in RESTClient Class to check how we can use
+    * GSON converter  */
+    implementation ('com.squareup.retrofit2:converter-gson:2.8.0')
+
+    /*OKHTTP and Testing APIs */
+
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 test {
+
     useJUnitPlatform()
+}
+
+/*Used to create JAR file.Manifestation is needed in order to run JAR file in CMD line  */
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' '),
+                'Main-Class': 'Main'
+        )
+    }
+    /*Not sure about this, need to learn */
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
