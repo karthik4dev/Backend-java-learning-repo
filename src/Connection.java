@@ -1,5 +1,3 @@
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -28,7 +26,7 @@ public class Connection {
 	}
 	
 	public static void main(String[] args) {
-		int code = Connection.getConCode("://alsmd;da.com");
+		int code = Connection.getConCode("https://example.com");
 		System.out.println(code==200?"Connection successful.HTTP Code:"+code:"");
 	}
 }
