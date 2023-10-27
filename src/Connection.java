@@ -1,4 +1,5 @@
 import java.net.URL;
+import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -26,7 +27,10 @@ public class Connection {
 	}
 	
 	public static void main(String[] args) {
-		int code = Connection.getConCode("https://example.com");
+		Scanner sc = new Scanner((System.in));
+		String url= sc.nextLine();
+		int code = Connection.getConCode(url);
 		System.out.println(code==200?"Connection successful.HTTP Code:"+code:"");
+		sc.close();
 	}
 }
